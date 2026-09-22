@@ -20,6 +20,7 @@ source:
       - numpy-2.0.patch
       - c++14.patch
       - petsc-3.25.patch
+      - pybind11-3.1-overload-dispatch
 
 build:
   # this doesn't actually affect the build hashes
@@ -168,6 +169,8 @@ outputs:
       - files:
           source:
             - python/test
+          recipe:
+            - test-dolfin.sh
         requirements:
           run:
             - nose
@@ -175,7 +178,7 @@ outputs:
             - git
             - decorator
         script:
-          - bash ${RECIPE_DIR}/parent/test-dolfin.sh
+          - bash test-dolfin.sh
   - package:
       name: fenics
     build:
@@ -194,7 +197,10 @@ outputs:
         - ${{ pin_subpackage("fenics-dolfin", exact=True) }}
     tests:
       - script:
-          - bash ${RECIPE_DIR}/parent/test-fenics.sh
+          - bash test-fenics.sh
+        files:
+          recipe:
+            - test-fenics.sh
 
 about:
   license: LGPL-3.0-or-later

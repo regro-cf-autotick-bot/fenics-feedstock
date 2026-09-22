@@ -20,7 +20,7 @@ source:
       - numpy-2.0.patch
       - c++14.patch
       - petsc-3.25.patch
-      - pybind11-3.1-overload-dispatch
+      - pybind11-3.1-overload-dispatch.patch
 
 build:
   # this doesn't actually affect the build hashes
@@ -56,7 +56,7 @@ outputs:
         - if: build_platform != target_platform
           then: numpy
         - if: build_platform != target_platform
-          then: fenics-ffc ==${{ version }}.dev*
+          then: fenics-ffc =${{ version }}.dev*
       host:
         - libblas
         - libcblas
@@ -75,7 +75,7 @@ outputs:
         - slepc
         - python
         - numpy
-        - fenics-ffc ==${{ version }}.dev*
+        - fenics-ffc =${{ version }}.dev*
         # need to list libnetcdf and netcdf-fortran twice to get version
         # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
         - hdf5
@@ -135,9 +135,9 @@ outputs:
         - sympy >=1
         - ${{ pin_subpackage("fenics-libdolfin", exact=True) }}
         - fenics-dijitso ==2019.1.0
-        - fenics-fiat ==${{ version }}.dev*
+        - fenics-fiat =${{ version }}.dev*
         - fenics-ufl-legacy ==2022.3.0
-        - fenics-ffc ==${{ version }}.dev*
+        - fenics-ffc =${{ version }}.dev*
         # need to list libnetcdf and netcdf-fortran twice to get version
         # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
         - hdf5
@@ -162,9 +162,9 @@ outputs:
         - sympy >=1
         - ${{ pin_subpackage("fenics-libdolfin", exact=True) }}
         - fenics-dijitso ==2019.1.0
-        - fenics-fiat ==${{ version }}.dev*
+        - fenics-fiat =${{ version }}.dev*
         - fenics-ufl-legacy ==2022.3.0
-        - fenics-ffc ==${{ version }}.dev*
+        - fenics-ffc =${{ version }}.dev*
     tests:
       - files:
           source:
